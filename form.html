@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission Form | Prestige University</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #0a0a1a;
+            --primary-blue: #1a237e;
+            --accent-blue: #303f9f;
+            --light-blue: #536dfe;
+            --text-light: #f5f5f5;
+            --text-muted: #b0bec5;
+            --error-red: #ff5252;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-blue));
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .logo img {
+            width: 50px;
+            height: 50px;
+            filter: drop-shadow(0 0 5px rgba(83, 109, 254, 0.5));
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--text-light), var(--light-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .form-container {
+            background: rgba(10, 10, 26, 0.8);
+            width: 100%;
+            max-width: 600px;
+            margin: 1rem auto;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(83, 109, 254, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(83, 109, 254, 0.1), transparent 70%);
+            z-index: -1;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            background: linear-gradient(to right, var(--text-light), var(--light-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            background: rgba(30, 30, 60, 0.5);
+            border: 1px solid rgba(83, 109, 254, 0.3);
+            border-radius: 10px;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--light-blue);
+            box-shadow: 0 0 0 2px rgba(83, 109, 254, 0.2);
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light-blue);
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(45deg, var(--accent-blue), var(--light-blue));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            box-shadow: 0 5px 15px rgba(48, 63, 159, 0.4);
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(48, 63, 159, 0.6);
+        }
+        
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .form-footer a {
+            color: var(--light-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            color: var(--error-red);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 5px;
+            background: rgba(83, 109, 254, 0.2);
+            border-radius: 5px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--accent-blue), var(--light-blue));
+            transition: width 0.3s ease;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/external-university-back-to-school-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png" alt="University Logo">
+        <span class="logo-text"> UNIVERSITY</span>
+    </div>
+    
+    <div class="form-container">
+        <h2>Admission Application</h2>
+        <form id="admissionForm" action="/predict" method="POST">
+            <div class="form-group">
+                <label for="ssc">SSC Percentage</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-graduation-cap input-icon"></i>
+                    <input type="number" id="ssc" name="ssc" class="form-control" placeholder="Enter your SSC percentage" min="0" max="100" step="0.01" required>
+                </div>
+                <div class="error-message" id="ssc-error">Please enter a valid percentage (0-100)</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="hsc">HSC Percentage</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-book-open input-icon"></i>
+                    <input type="number" id="hsc" name="hsc" class="form-control" placeholder="Enter your HSC percentage" min="0" max="100" step="0.01" required>
+                </div>
+                <div class="error-message" id="hsc-error">Please enter a valid percentage (0-100)</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="degree">Degree Percentage</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-university input-icon"></i>
+                    <input type="number" id="degree" name="degree" class="form-control" placeholder="Enter your degree percentage" min="0" max="100" step="0.01" required>
+                </div>
+                <div class="error-message" id="degree-error">Please enter a valid percentage (0-100)</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="entrance">Entrance Exam Score</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-trophy input-icon"></i>
+                    <input type="number" id="entrance" name="entrance" class="form-control" placeholder="Enter your entrance exam score" min="0" max="300" required>
+                </div>
+                <div class="error-message" id="entrance-error">Please enter a valid score (0-300)</div>
+            </div>
+            
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <button type="submit" class="btn-submit" id="submitBtn">
+                <span id="submitText">Submit Application</span>
+                <i class="fas fa-paper-plane" id="submitIcon"></i>
+            </button>
+        </form>
+        
+        <div class="form-footer">
+            <p>Need help? <a href="#">Contact our admission office</a></p>
+            <p>By submitting, you agree to our <a href="#">terms and conditions</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('admissionForm').addEventListener('submit', function(e) {
+            // Validate inputs first
+            const ssc = document.getElementById('ssc');
+            const hsc = document.getElementById('hsc');
+            const degree = document.getElementById('degree');
+            const entrance = document.getElementById('entrance');
+            
+            let isValid = true;
+            
+            // Validate SSC (0-100)
+            if (ssc.value < 0 || ssc.value > 100) {
+                document.getElementById('ssc-error').style.display = 'block';
+                ssc.focus();
+                isValid = false;
+            } else {
+                document.getElementById('ssc-error').style.display = 'none';
+            }
+            
+            // Validate HSC (0-100)
+            if (hsc.value < 0 || hsc.value > 100) {
+                document.getElementById('hsc-error').style.display = 'block';
+                if (isValid) hsc.focus();
+                isValid = false;
+            } else {
+                document.getElementById('hsc-error').style.display = 'none';
+            }
+            
+            // Validate Degree (0-100)
+            if (degree.value < 0 || degree.value > 100) {
+                document.getElementById('degree-error').style.display = 'block';
+                if (isValid) degree.focus();
+                isValid = false;
+            } else {
+                document.getElementById('degree-error').style.display = 'none';
+            }
+            
+            // Validate Entrance (0-300)
+            if (entrance.value < 0 || entrance.value > 300) {
+                document.getElementById('entrance-error').style.display = 'block';
+                if (isValid) entrance.focus();
+                isValid = false;
+            } else {
+                document.getElementById('entrance-error').style.display = 'none';
+            }
+            
+            if (!isValid) {
+                e.preventDefault();
+                return;
+            }
+            
+            // Show loading state
+            e.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const submitIcon = document.getElementById('submitIcon');
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+            
+            submitBtn.disabled = true;
+            submitText.textContent = 'Processing...';
+            submitIcon.className = 'fas fa-spinner fa-spin';
+            progressContainer.style.display = 'block';
+            
+            // Animate progress bar
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 5;
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    // Submit the form after animation completes
+                    setTimeout(() => {
+                        this.submit();
+                    }, 500);
+                }
+            }, 100);
+        });
+    </script>
+</body>
+</html>

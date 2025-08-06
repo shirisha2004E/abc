@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission Result 🎓</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #006400, #013220); /* Dark Green Gradient */
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.05); /* Glass effect */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 50px 70px;
+            border-radius: 25px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.4); /* Green glow */
+            text-align: center;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 25px;
+            color: #00FF7F; /* Spring Green */
+            text-shadow: 2px 2px #000;
+            letter-spacing: 1px;
+        }
+
+        .result {
+            font-size: 2.2em;
+            color: #7CFC00; /* Lawn Green */
+            margin: 25px 0;
+            font-weight: 800;
+            text-shadow: 0 0 20px #00FF00;
+            animation: pulse 2s infinite;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 35px;
+            padding: 14px 35px;
+            background-color: #00FF7F;
+            color: #003300;
+            text-decoration: none;
+            font-size: 1.1em;
+            border-radius: 50px;
+            box-shadow: 0 0 15px #00FF7F, 0 0 30px #00FF00 inset;
+            transition: all 0.4s ease;
+        }
+
+        .btn:hover {
+            background-color: #00FF00;
+            color: #fff;
+            box-shadow: 0 0 25px #00FF00, 0 0 50px #7CFC00 inset;
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: scale(0.8);}
+            to {opacity: 1; transform: scale(1);}
+        }
+
+        @keyframes pulse {
+            0%, 100% { text-shadow: 0 0 20px #00FF00, 0 0 40px #7CFC00; }
+            50% { text-shadow: 0 0 40px #00FF7F, 0 0 80px #00FF00; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 Admission Status</h1>
+        <div class="result">
+            You are: <strong>{{ result }}</strong>
+        </div>
+        <a href="/" class="btn">⬅ Back to Home</a>
+    </div>
+</body>
+</html>
